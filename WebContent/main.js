@@ -3,10 +3,10 @@ window.addEventListener('load', function() {
 
 	var game = new Phaser.Game({
     "title": "Space_Battle",
-    "width": 800,
+    "width": 1000,
     "height": 450,
     "type": Phaser.AUTO,
-    "backgroundColor": "#88F",
+    "backgroundColor": "#121212",
     "parent": "game-container",
     "render": {"pixelArt": true},
     "physics": {"default": "arcade"},

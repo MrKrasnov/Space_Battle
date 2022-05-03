@@ -1,5 +1,93 @@
 {
-  "textures": [],
+  "textures": [{
+    "image": "textures.png",
+    "frames": [
+      {
+        "filename": "enemy",
+        "trimmed": true,
+        "rotated": false,
+        "frame": {
+          "x": 24,
+          "y": 12,
+          "w": 20,
+          "h": 30
+        },
+        "spriteSourceSize": {
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 30
+        },
+        "sourceSize": {
+          "w": 20,
+          "h": 30
+        }
+      },
+      {
+        "filename": "enemy-fire",
+        "trimmed": true,
+        "rotated": false,
+        "frame": {
+          "x": 2,
+          "y": 2,
+          "w": 1,
+          "h": 8
+        },
+        "spriteSourceSize": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 8
+        },
+        "sourceSize": {
+          "w": 1,
+          "h": 8
+        }
+      },
+      {
+        "filename": "player",
+        "trimmed": true,
+        "rotated": false,
+        "frame": {
+          "x": 2,
+          "y": 12,
+          "w": 20,
+          "h": 30
+        },
+        "spriteSourceSize": {
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 30
+        },
+        "sourceSize": {
+          "w": 20,
+          "h": 30
+        }
+      },
+      {
+        "filename": "player-fire",
+        "trimmed": true,
+        "rotated": false,
+        "frame": {
+          "x": 5,
+          "y": 2,
+          "w": 1,
+          "h": 8
+        },
+        "spriteSourceSize": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 8
+        },
+        "sourceSize": {
+          "w": 1,
+          "h": 8
+        }
+      }
+    ]
+  }],
   "meta": {
     "app": "Phaser Editor - Atlas Generator",
     "version": "2"

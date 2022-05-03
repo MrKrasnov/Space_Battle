@@ -1,6 +1,11 @@
 {
   "version": 3,
-  "files": [],
+  "files": [
+    "Design/enemy-fire.png",
+    "Design/player-fire.png",
+    "Design/player.png",
+    "Design/enemy.png"
+  ],
   "settings": {
     "pot": false,
     "paddingX": 2,
@@ -39,5 +44,94 @@
     "multiatlas": true,
     "includeNumberOfFolders": 0
   },
-  "pages": []
+  "pages": [{"frames": [
+    {
+      "trimmed": true,
+      "rotated": false,
+      "frame": {
+        "x": 24,
+        "y": 12,
+        "w": 20,
+        "h": 30
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 20,
+        "h": 30
+      },
+      "name": "enemy",
+      "regionIndex": -1
+    },
+    {
+      "trimmed": true,
+      "rotated": false,
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 1,
+        "h": 8
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 8
+      },
+      "sourceSize": {
+        "w": 1,
+        "h": 8
+      },
+      "name": "enemy-fire",
+      "regionIndex": -1
+    },
+    {
+      "trimmed": true,
+      "rotated": false,
+      "frame": {
+        "x": 2,
+        "y": 12,
+        "w": 20,
+        "h": 30
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 20,
+        "h": 30
+      },
+      "name": "player",
+      "regionIndex": -1
+    },
+    {
+      "trimmed": true,
+      "rotated": false,
+      "frame": {
+        "x": 5,
+        "y": 2,
+        "w": 1,
+        "h": 8
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 8
+      },
+      "sourceSize": {
+        "w": 1,
+        "h": 8
+      },
+      "name": "player-fire",
+      "regionIndex": -1
+    }
+  ]}]
 }
