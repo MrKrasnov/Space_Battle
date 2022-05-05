@@ -26,11 +26,17 @@ class Scene1 extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
+
 	create() {
 		this._create();
+		
 		this.canvas = this.sys.game.canvas;
 		this.key = this.input.keyboard.createCursorKeys();
 		this.enemyTarget = Phaser.Math.Between(0, this.canvas.width - 15);
+		
+		this.playerFire = this.physics.add.group({
+        	maxSize: 3
+    	});
 	}
 
 	playerDrive() {
@@ -54,8 +60,27 @@ class Scene1 extends Phaser.Scene {
 		}
 	}
 
+	shootLaser(spriteGroup, shootingSprite, sptireImage, velocityY) {
+    	spriteGroup.create(
+        	shootingSprite.x - 6,
+        	shootingSprite.y,
+        	sptireImage,
+    	).setVelocity(0, velocityY);
+	}
+
 	update() {
 		this.playerDrive();
+		
+		if (Phaser.Input.Keyboard.JustDown(this.key.space) && this.playerFire.getChildren().length < 3) {
+        	this.shootLaser(this.playerFire, this.fPlayer, 'playerFire', -200);
+    	}
+
+    	this.playerFire.getChildren().forEach(laser => {
+        	if (laser.body.y <= 0) {
+            	laser.destroy();
+        	}
+    	})
+
 		this.enemyDrive();
 	}
 
