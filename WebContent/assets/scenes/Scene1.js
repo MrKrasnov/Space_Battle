@@ -29,14 +29,18 @@ class Scene1 extends Phaser.Scene {
 
 	create() {
 		this._create();
-		
+
 		this.canvas = this.sys.game.canvas;
 		this.key = this.input.keyboard.createCursorKeys();
 		this.enemyTarget = Phaser.Math.Between(0, this.canvas.width - 15);
-		
+
 		this.playerFire = this.physics.add.group({
-        	maxSize: 3
-    	});
+			maxSize: 3
+		});
+
+		this.enemyFire = this.physics.add.group({
+			maxSize: 3
+		});
 	}
 
 	playerDrive() {
@@ -60,26 +64,36 @@ class Scene1 extends Phaser.Scene {
 		}
 	}
 
-	shootLaser(spriteGroup, shootingSprite, sptireImage, velocityY) {
-    	spriteGroup.create(
-        	shootingSprite.x - 6,
-        	shootingSprite.y,
-        	sptireImage,
-    	).setVelocity(0, velocityY);
+	shootLaser(spriteGroup, shootingSprite, sptireImage, velocityX, velocityY) {
+		spriteGroup.create(
+			shootingSprite.x - 6,
+			shootingSprite.y,
+			sptireImage,
+		).setVelocity(velocityX, velocityY);
 	}
 
 	update() {
 		this.playerDrive();
-		
-		if (Phaser.Input.Keyboard.JustDown(this.key.space) && this.playerFire.getChildren().length < 3) {
-        	this.shootLaser(this.playerFire, this.fPlayer, 'playerFire', -200);
-    	}
 
-    	this.playerFire.getChildren().forEach(laser => {
-        	if (laser.body.y <= 0) {
-            	laser.destroy();
-        	}
-    	})
+		if (Phaser.Input.Keyboard.JustDown(this.key.space) && this.playerFire.getChildren().length < 3) {
+			this.shootLaser(this.playerFire, this.fPlayer, 'playerFire', 0, -200);
+		}
+
+		if (this.enemyFire.getChildren().length < 3) {
+			this.shootLaser(this.enemyFire, this.fEnemy, 'enemyFire', 0, 200);
+		}
+
+		this.playerFire.getChildren().forEach(laser => {
+			if (laser.body.y <= 0) {
+				laser.destroy();
+			}
+		})
+
+		this.enemyFire.getChildren().forEach(laser => {
+			if (laser.body.y >= 900) {
+				laser.destroy();
+			}
+		})
 
 		this.enemyDrive();
 	}

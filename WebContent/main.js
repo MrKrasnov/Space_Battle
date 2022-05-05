@@ -24,6 +24,7 @@ class Boot extends Phaser.Scene {
 	preload() {
 		this.load.pack("pack", "assets/pack.json");
 		this.load.image("playerFire", "../Design/player-fire.png");
+		this.load.image("enemyFire", "../Design/enemy-fire.png");
 	}
 
 	create() {
