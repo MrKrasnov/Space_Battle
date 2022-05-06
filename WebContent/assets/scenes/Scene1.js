@@ -29,10 +29,13 @@ class Scene1 extends Phaser.Scene {
 
 	create() {
 		this._create();
-
+		this.over = true;
 		this.canvas = this.sys.game.canvas;
 		this.key = this.input.keyboard.createCursorKeys();
 		this.enemyTarget = Phaser.Math.Between(0, this.canvas.width - 15);
+
+		this.physics.add.existing(this.fPlayer);
+		this.physics.add.existing(this.fEnemy);
 
 		this.playerFire = this.physics.add.group({
 			maxSize: 3
@@ -41,6 +44,18 @@ class Scene1 extends Phaser.Scene {
 		this.enemyFire = this.physics.add.group({
 			maxSize: 3
 		});
+	}
+
+	hitWin() {
+		let style = { font: '20px Ubuntu', fill: '#fff' };
+		this.winText = this.add.text(20, 20, 'You win', style);
+		this.over = false;
+	}
+
+	hitLose() {
+		let style = { font: '20px Ubuntu', fill: '#fff' };
+		this.loseText = this.add.text(20, 20, 'Game over', style);
+		this.over = false;
 	}
 
 	playerDrive() {
@@ -73,29 +88,39 @@ class Scene1 extends Phaser.Scene {
 	}
 
 	update() {
-		this.playerDrive();
+		let laserEnemy;
+		let laserPlayer;
 
-		if (Phaser.Input.Keyboard.JustDown(this.key.space) && this.playerFire.getChildren().length < 3) {
-			this.shootLaser(this.playerFire, this.fPlayer, 'playerFire', 0, -200);
+		if (this.over) {
+			if (Phaser.Input.Keyboard.JustDown(this.key.space) && this.playerFire.getChildren().length < 3) {
+				this.shootLaser(this.playerFire, this.fPlayer, 'playerFire', 0, -200);
+			}
+
+			if (this.enemyFire.getChildren().length < 3) {
+				this.shootLaser(this.enemyFire, this.fEnemy, 'enemyFire', 0, 200);
+			}
+
+			this.playerFire.getChildren().forEach(laser => {
+				if (laser.body.y <= 0) {
+					laser.destroy();
+				}
+				laserPlayer = laser;
+			})
+
+			this.enemyFire.getChildren().forEach(laser => {
+				if (laser.body.y >= 900) {
+					laser.destroy();
+				}
+				laserEnemy = laser;
+			})
+			this.physics.add.overlap(this.fPlayer, this.laserEnemy, this.hitLose, null, this);
+			this.physics.add.overlap(this.fEnemy, this.laserPlayer, this.hitWin, null, this);
+			this.playerDrive();
+			this.enemyDrive();
 		}
 
-		if (this.enemyFire.getChildren().length < 3) {
-			this.shootLaser(this.enemyFire, this.fEnemy, 'enemyFire', 0, 200);
-		}
-
-		this.playerFire.getChildren().forEach(laser => {
-			if (laser.body.y <= 0) {
-				laser.destroy();
-			}
-		})
-
-		this.enemyFire.getChildren().forEach(laser => {
-			if (laser.body.y >= 900) {
-				laser.destroy();
-			}
-		})
-
-		this.enemyDrive();
+		this.laserEnemy = laserEnemy;
+		this.laserPlayer = laserPlayer;
 	}
 
 
